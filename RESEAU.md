@@ -14,7 +14,7 @@ Après avoir téléchargé le fichier concerné, nous l'ouvrons avec Wireshark e
 ```bash
 sudo wireshark
 ```
-Ensuite, en naviguant dans **Analyse** > **Suivre** > **Flux TCP**, nous obtenons le mot de passe en clair : **cdts3500**.
+Ensuite, en naviguant dans **Analyse** > **Suivre** > **Flux TCP**, nous obtenons le mot de passe en clair.
 
 ---
 
@@ -23,7 +23,6 @@ En utilisant `tshark`, nous pouvons extraire les données pertinentes du fichier
 ```bash
 tshark -r ch2.pcap -z "follow,tcp,ascii,0" | grep -i -A10 password
 ```
-Le flag trouvé est : `user`.
 
 ---
 
@@ -36,9 +35,8 @@ User-Agent: InsaneBrowser
 Host: www.myipv6.org
 Accept: */*
 ```
-Après décodage en Base64, nous obtenons les identifiants suivants :
-- **Login** : confi
-- **Mot de passe** : dential
+Après décodage en Base64, nous obtenons les identifiants.
+
 
 ---
 
@@ -51,9 +49,7 @@ Dans les en-têtes HTTP, nous trouvons :
 ```
 Authorization: Basic dXNlcnRlc3Q6cGFzc3dvcmQ=
 ```
-Décodé en Base64, cela nous donne :
-- **Login** : usertest
-- **Mot de passe** : password
+Décodé en Base64.
 
 ---
 
@@ -73,7 +69,6 @@ for record in records:
 Le résultat nous donne :
 - **Device** : GT-S7390G
 - **Adresse MAC** : 0C:B3:19:B9:4F:C6
-- **Flag** : c1d0349c153ed96fe2fadf44e880aef9e69c122b
 
 ---
 

